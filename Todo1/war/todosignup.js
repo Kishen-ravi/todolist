@@ -3,6 +3,8 @@ function validateEmail(email) {
   return re.test(email);
 }
 
+
+
 function validate(){
   var name = document.getElementById("name").value;
   var email = document.getElementById("email").value;
@@ -12,7 +14,7 @@ function validate(){
   var atpos = email.indexOf("@");
   var dotpos = email.lastIndexOf(".");
   
-  if (name != '' && email != '' && pass != '' && repass != '') {
+
   if(name == ""){
     alert("Enter name!");
     document.getElementById("name").style.backgroundColor = "red";
@@ -70,8 +72,6 @@ function validate(){
     }
   }
   }
-  else{
-	  return false;
-  }
+
   
-}
+
