@@ -144,3 +144,32 @@ ul li:hover {
 .dropdown:hover .dropbtn {
     background-color: #3e8e41;
 }
+
+input[type="submit"]{
+	margin: auto;
+	width:40%;
+	padding:10px 45px;
+	background-color:#3399ff/* #2BC1F2 */;
+	border:none;
+	color:#fff;
+	font-size:18px;
+	font-weight:700;
+	cursor:pointer;
+	font-family:'Ubuntu',sans-serif;
+}
+
+div#form_sample{
+	background-color: #f9f9f9;
+    margin: auto;
+    width: 40%;
+    padding: 10px;
+    text-align: center;
+	
+}
+
+.myP{
+	margin: 0px;
+	height : 0px;
+	border: none;
+	padding:0px;
+}

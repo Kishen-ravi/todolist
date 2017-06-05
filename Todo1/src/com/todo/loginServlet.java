@@ -1,6 +1,7 @@
 package com.todo;
 
 import java.io.*;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,17 +12,24 @@ import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.KeyFactory;
+import com.google.appengine.api.datastore.Text;
+import com.google.appengine.labs.repackaged.org.json.JSONObject;
+import com.google.appengine.repackaged.com.google.gson.Gson;
 
 public class loginServlet extends HttpServlet {
 
+	@SuppressWarnings("unchecked")
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String mail = request.getParameter("email");
 		String password = request.getParameter("password");
 		String pass = "";
-		String name = "";
+		String name = "";		
+		String name1 = "";
 		String email = mail.toLowerCase();
 		String login = "";
+		String mail1 = "";
+		ArrayList<String> task = new ArrayList<String>();
 		
 //		request.setAttribute("email" , email ) ;
 //		request.setAttribute("password" , password ) ;
@@ -66,9 +74,21 @@ public class loginServlet extends HttpServlet {
 //
 //			String html="<html><head><title> Home </title></head><body><p>Logged in Successfully</p><p>Username : "+name+"</p><p>Email : "+mail+"</p><button onclick=\"window.location.href='/index.html'\">Logout</button></body></html>";
 //			out.println(html);
+			try{
+				Key taskKey = KeyFactory.createKey("task", email);
+				Entity employee = datastore.get(taskKey);
+				task =   (ArrayList<String>) employee.getProperty("task");
+				name1 = (String) employee.getProperty("name");
+				mail1 = (String) employee.getProperty("email");
+				System.out.println(task);
+			}
+			catch(Exception e){
+				System.out.println(e);
+			}
 			RequestDispatcher dispatcher = request.getRequestDispatcher("todologin.jsp");
 			request.setAttribute("User", name);
 			request.setAttribute("Email", email);
+			request.setAttribute("Task", task);
 			dispatcher.forward( request, response );
 			}
 		else

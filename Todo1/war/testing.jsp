@@ -1,11 +1,61 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Home Page</title>
+  <link rel="stylesheet" type="text/css" href="todo.css">
+</head>
+<body>
+  <div class="dropdown">
+  <input type="button" value="<%=request.getAttribute("User")%>" class="dropbtn">
+  <div class="dropdown-content">
+    <a href="#" id="qwerty"><%=request.getAttribute("Email")%></a>
+    
+    <%String email = (String)request.getAttribute("Email");%>
+    <%String name = (String)request.getAttribute("User");%>
+	
+	
+	
+    <a href="index.jsp">Logout</a>
+  </div>
+  </div>
+<div id="form_sample"></div>
+<script src="formjs.js"></script>
+<script type="text/javascript">
+
+<%-- var x = document.getElementById("form_sample");
+var createform = document.createElement('form'); // Create New Element Form
+createform.setAttribute("action", "/list"); // Setting Action Attribute on Form
+createform.setAttribute("method", "post");// Setting Method Attribute on Form
+createform.id = "form1";
+x.appendChild(createform);
+
+var textbox = '<input type="text" class="details"id="task" placeholder="Add Item..." name="task" onkeydown = "if (event.keyCode == 13){add("<%= email %>","<%= name %>");}"   >';
+document.getElementById("form1").innerHTML(textbox);
+
+var ul = document.createElement("ul");
+ul.id = "todo";
+createform.appendChild(ul);
+
+var submitelement = document.createElement('input'); // Append Submit Button
+submitelement.setAttribute("type", "submit");
+submitelement.setAttribute("name", "dsubmit");
+submitelement.setAttribute("value", "Submit");
+submitelement.id = "sub";
+createform.appendChild(submitelement);
+ --%>
 var user = "";
 var name ="";
 
-function add(email,nam) {
+function add(email,name) {
     var task = document.getElementById('task').value;
     var task1 = document.getElementById("task");
     user = email;
-    name = nam;
+    name = name;
     console.log ("user is:: " +email);
     var todos = [];
     var check = "false";
@@ -27,7 +77,7 @@ function add(email,nam) {
       // localStorage.setItem(td, JSON.stringify(todos));
 
       task1.style.backgroundColor = "";
-      push(task,td,check,delte);
+      push(user,name,task,td,check,delte);
       document.getElementById('task').value = "";
       event(td,task);
       console.log(todos);
@@ -123,13 +173,9 @@ function main() {
 main();
 
 
-document.getElementById('logout').addEventListener('click', clear);
-document.getElementById('submit').addEventListener('click', clear);
+//document.getElementById('add').addEventListener('click', add);
 
-function clear(){
-	localStorage.clear();
 
-}
 
 function remove() {
     var id = this.getAttribute('id');
@@ -142,7 +188,7 @@ function remove() {
     var x = document.getElementById(qid).checked;
     console.log(id);
     document.getElementById(sid).style.display = 'none';
-    push(txt,id,x,del);
+    push(user,txt,id,x,del);
 
     return false;
 }
@@ -182,7 +228,7 @@ function update() {
     } else {
         txt = upda;
         console.log(txt);
-        push(txt,id,ck,rm);
+        push(user,name,txt,id,ck,rm);
 
     // todos.push(txt);
     // todos.push(id);
@@ -195,10 +241,10 @@ function update() {
 }
 var json = "";
 
-function push(/*user,name,*/text,id,check,delte){
+function push(user,name,text,id,check,delte){
   var person = {};
-//  person.user = user;
-//  person.name = name;
+  person.user = user;
+  person.name = name;
   person.note = text;
   person.id = id;
   person.checked = check;
@@ -210,7 +256,7 @@ function push(/*user,name,*/text,id,check,delte){
   // todos.push(delte);
   localStorage.setItem(id, JSON.stringify(todos));
   console.log(JSON.stringify(todos));
-  setdata();
+
  
 }
 
@@ -260,29 +306,32 @@ var id = this.getAttribute('id');
     var x = document.getElementById(qwe).checked;
     console.log(x);
     del = "false";
-    push(t,qid,x,del);
+    push(user,name,t,qid,x,del);
 
   }, false);
+  
+/* document.getElementById('sub').addEventListener('submit', show);
 
 var arr= [];
-function setdata() {
+  
+function show(event) {
 	  console.log("local storage");
 	  for (i = 0; i < localStorage.length; i++)   {
 	    var todo = localStorage.key(i) + "=[" + localStorage.getItem(localStorage.key(i)) + "]";
 	    console.log(todo);
 	    var todo1 = localStorage.getItem(localStorage.key(i));
 	    var tk = JSON.parse(todo1);
-//	    console.log(tk[0].user);
-//	    var email = tk[0].user;
-//	    var name = tk[0].name;
+	    console.log(tk[0].user);
+	    var email = tk[0].user;
+	    var name = tk[0].name;
 	    var uid = localStorage.key(i);
 	    var myData = JSON.stringify(tk);
 	    arr.push(myData);
 	  }	    
-	  
 	    var data = JSON.stringify(arr);
-	    
-	    document.getElementById("text").value = data;
-	    document.getElementById("text1").value = user;
-	    document.getElementById("text2").value = name;
-}
+	    return data;
+} */
+</script>
+</body>
+</html>
+
