@@ -53,18 +53,36 @@
 <script>
 function myFunction() {
     console.log(<%= list %>);
+    var m = <%=list.size()%>;
+    console.log(m);
     insert();
 }
 
+<%-- <%
+ out.println("size" + list.size());
+for(int i = 0; i < list.size(); i++)
+{
+   out.println("cool =" +list.get(i));
+   
+}
+
+%> --%>
+
 function insert(){
 	var temp =  <%= array[0] %>;
+	var temp1 = <%= list %>;
+	var set = temp[0];
+	console.log("Testing::"+ set);
+	console.log("maining array: " + temp1);
+	typeof(temp);
 	console.log("main array: " + temp);
 	var n = temp.length;
 	console.log(n);
-	for(i=0; i<n ; i++ )
+	for(k=0; k<n ; k++ )
 		{
-			console.log(temp[i]);
-			a = temp[i];
+			console.log(k);
+			console.log(temp[k]);
+			a = temp[k];
 			console.log(a);
 			b = JSON.parse(a)
 			console.log(typeof(b));

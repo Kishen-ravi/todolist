@@ -1,6 +1,7 @@
 package com.todo;
 
 import java.io.*;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -28,7 +29,10 @@ String email = mail.toLowerCase();
 String pass = "";
 String name1 = "";
 String login = "";
+ArrayList<String> task = new ArrayList<String>();
 
+String task1 = "[[\"[{\"note\":\"\",\"id\":\"todoid2c2aeb\",\"checked\":\"false\",\"removed\":\"false\"}]\"]]";
+task.add(task1);
 request.setAttribute("name" , name ) ;
 request.setAttribute("email" , email ) ;
 request.setAttribute("password" , password ) ;
@@ -63,10 +67,16 @@ person.setProperty("name", name);
 person.setProperty("email", email);
 person.setProperty("password", password);
 
-
+Key taskKey = KeyFactory.createKey("task", email);
+Entity list = new Entity(taskKey);
+list.setProperty("task", task);
+//list.setProperty("email", email);
+list.setProperty("user", name);
+System.out.println(list);
 try{
 	
   datastore.put(person);
+  datastore.put(list);
 
 }catch (Exception e2) 
 {
@@ -80,6 +90,7 @@ try{
 RequestDispatcher dispatcher = request.getRequestDispatcher("todologin.jsp");
 request.setAttribute("User", name);
 request.setAttribute("Email", email);
+request.setAttribute("Task", task);
 dispatcher.forward( request, response );
 }
 
