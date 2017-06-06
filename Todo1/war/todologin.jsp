@@ -53,6 +53,7 @@
 <script>
 myFunction();
 function myFunction() {
+	localStorage.clear();
     console.log(<%= list %>);
     var m = <%=list.size()%>;
     console.log(m);
@@ -90,7 +91,17 @@ function insert(){
 			task = b[0];
 			console.log(task);
 			push(task.note,task.id,task.checked,task.removed);
- 			event(task.id,task.note);
+ 			getid = "s"+task.id;
+ 			cbid = "us"+task.id;
+ 			if(task.removed !== "true")
+ 		    {
+ 				event(task.id,task.note);
+ 		      	if(task.checked == true)
+ 		    	  {
+ 		    	  document.getElementById(getid).className = "checked";
+ 		    	  document.getElementById(cbid).checked = true;
+ 		    	  }
+ 		    }
 	}
 }
 

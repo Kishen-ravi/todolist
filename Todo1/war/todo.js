@@ -106,13 +106,17 @@ function show() {
     if(tk[0].removed !== "true")
     {
       event(uid,tk[0].note);
+      if(tk[0].checked === "true")
+    	  {
+    	  document.getElementById("s"+tk[0].id).className = "checked";
+    	  }
     }
   }
 }
 
-if(localStorage.length !== null){
-  show();
-}
+//if(localStorage.length !== null){
+//  show();
+//}
 
 function main() {
   var buttons = document.getElementsByClassName('remove');
