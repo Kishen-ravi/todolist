@@ -264,9 +264,10 @@ var id = this.getAttribute('id');
 
   }, false);
 
-var arr= [];
+
 function setdata() {
 	  console.log("local storage");
+	  var arr= [];
 	  for (i = 0; i < localStorage.length; i++)   {
 	    var todo = localStorage.key(i) + "=[" + localStorage.getItem(localStorage.key(i)) + "]";
 	    console.log(todo);
@@ -278,6 +279,7 @@ function setdata() {
 	    var uid = localStorage.key(i);
 	    var myData = JSON.stringify(tk);
 	    arr.push(myData);
+	    document.getElementById("text").value = "";
 	  }	    
 	  
 	    var data = JSON.stringify(arr);

@@ -34,8 +34,8 @@
 <!--   <form action="/list" method="post" >
  -->  <div id="myDIV" class="form">
     <h2 style="margin:5px">My To Do List</h2>
-    <button onclick="myFunction()">Try it</button>
-    
+<!--     <button onclick="myFunction()">Try it</button>
+ -->    
     <input type="text" class="details"id="task" placeholder="Add Item..." name="task" onkeydown = "if (event.keyCode == 13){add('<%= email %>','<%= name %>');}"   >
     <!-- <button id="add" class="addBtn">Add</button> -->
     <p></p>
@@ -51,6 +51,7 @@
  <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
 </body>
 <script>
+myFunction();
 function myFunction() {
     console.log(<%= list %>);
     var m = <%=list.size()%>;
@@ -89,8 +90,8 @@ function insert(){
 			task = b[0];
 			console.log(task);
 			push(task.note,task.id,task.checked,task.removed);
-			event(task.id,task.note);
-		}
+ 			event(task.id,task.note);
+	}
 }
 
 </script>
