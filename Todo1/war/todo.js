@@ -27,7 +27,7 @@ function add(email,nam) {
       // localStorage.setItem(td, JSON.stringify(todos));
 
       task1.style.backgroundColor = "";
-      push(task,td,check,delte);
+      push(user,name,task,td,check,delte);
       document.getElementById('task').value = "";
       event(td,task);
       console.log(todos);
@@ -136,6 +136,8 @@ function clear(){
 }
 
 function remove() {
+	var user = email();
+	var name = name1();
     var id = this.getAttribute('id');
     qid = "us" + id;
     var sid = "s" + id;
@@ -146,7 +148,7 @@ function remove() {
     var x = document.getElementById(qid).checked;
     console.log(id);
     document.getElementById(sid).style.display = 'none';
-    push(txt,id,x,del);
+    push(user,name,txt,id,x,del);
 
     return false;
 }
@@ -176,6 +178,8 @@ function update() {
   var todo1 = localStorage.getItem(localStorage.key(i));
   var td = JSON.parse(todo1);
   console.log(td);
+  var user = email();
+  var name = name1();
   function updated(){
     var x = document.getElementById(id).parentNode.id;
     console.log(x);
@@ -186,12 +190,14 @@ function update() {
     } else {
         txt = upda;
         console.log(txt);
-        push(txt,id,ck,rm);
-
+        push(user,name,txt,id,ck,rm);
+        document.getElementById(id).textContent=txt;
+        document.getElementById("t"+id).className = "text";
+        document.getElementById(id).className = "show";
     // todos.push(txt);
     // todos.push(id);
     // localStorage.setItem(x, JSON.stringify(todos));
-    location.reload();
+//        location.reload();
   }
   }
 
@@ -199,7 +205,8 @@ function update() {
 }
 var json = "";
 
-function push(/*user,name,*/text,id,check,delte){
+function push(user,name,text,id,check,delte){
+	
   var person = {};
 //  person.user = user;
 //  person.name = name;
@@ -214,7 +221,7 @@ function push(/*user,name,*/text,id,check,delte){
   // todos.push(delte);
   localStorage.setItem(id, JSON.stringify(todos));
   console.log(JSON.stringify(todos));
-  setdata();
+  setdata(user,name);
  
 }
 
@@ -244,7 +251,8 @@ var id = this.getAttribute('id');
       console.log(x);
       console.log(x.id);
       var z  = x.id;
-
+      var user = email();
+  	var name = name1();
       var y = x.getElementsByClassName('update');
       var qid = y[0].id;
       console.log(y);
@@ -264,12 +272,12 @@ var id = this.getAttribute('id');
     var x = document.getElementById(qwe).checked;
     console.log(x);
     del = "false";
-    push(t,qid,x,del);
+    push(user,name,t,qid,x,del);
 
   }, false);
 
 
-function setdata() {
+function setdata(u,n) {
 	  console.log("local storage");
 	  var arr= [];
 	  for (i = 0; i < localStorage.length; i++)   {
@@ -289,6 +297,6 @@ function setdata() {
 	    var data = JSON.stringify(arr);
 	    
 	    document.getElementById("text").value = data;
-	    document.getElementById("text1").value = user;
-	    document.getElementById("text2").value = name;
+	document.getElementById("text1").value = u;
+    document.getElementById("text2").value = n;
 }

@@ -52,6 +52,7 @@
 </body>
 <script>
 myFunction();
+/* setdata(); */
 function myFunction() {
 	localStorage.clear();
     console.log(<%= list %>);
@@ -69,10 +70,19 @@ for(int i = 0; i < list.size(); i++)
 }
 
 %> --%>
-
+function email(){
+	var user = "<%=email%>";
+	return user;	
+}
+function name1(){
+	var name = "<%=name%>";
+	return name;
+}
 function insert(){
 	var temp =  <%= array[0] %>;
 	var temp1 = <%= list %>;
+	var user = "<%=email%>";
+	var name = "<%=name%>";
 	var set = temp[0];
 	console.log("Testing::"+ set);
 	console.log("maining array: " + temp1);
@@ -90,7 +100,7 @@ function insert(){
 			console.log(typeof(b));
 			task = b[0];
 			console.log(task);
-			push(task.note,task.id,task.checked,task.removed);
+			push(user,name,task.note,task.id,task.checked,task.removed);
  			getid = "s"+task.id;
  			cbid = "us"+task.id;
  			if(task.removed !== "true")
