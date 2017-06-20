@@ -86,6 +86,8 @@ public class loginServlet extends HttpServlet {
 				System.out.println(e);
 			}
 			RequestDispatcher dispatcher = request.getRequestDispatcher("todologin.jsp");
+			String success="<p></p>";
+			request.setAttribute("Success", success);
 			request.setAttribute("User", name);
 			request.setAttribute("Email", email);
 			request.setAttribute("Task", task);

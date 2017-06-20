@@ -38,7 +38,8 @@
  -->    
     <input type="text" class="details"id="task" placeholder="Add Item..." name="task" onkeydown = "if (event.keyCode == 13){add('<%= email %>','<%= name %>');}"   >
     <!-- <button id="add" class="addBtn">Add</button> -->
-    <p></p>
+    <br></br>
+    <p><%=request.getAttribute("Success")%></p>
     <ul id="todo"></ul>
     
   </div>
@@ -47,15 +48,19 @@
 <div id="form_sample"></div> <!-- Include JS file here -->
 <script src="formjs.js"></script>
 <!-- </form>
- --><script src="todo.js"></script>
+ -->
+ <script src="todo.js"></script>
  <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
 </body>
 <script>
+$(document).ready(function(){    
+    $("p").fadeOut(3000);
+});
 myFunction();
 /* setdata(); */
 function myFunction() {
 	localStorage.clear();
-    console.log(<%= list %>);
+    <%-- console.log(<%= list %>); --%>
     var m = <%=list.size()%>;
     console.log(m);
     insert();

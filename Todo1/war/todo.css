@@ -63,9 +63,10 @@ ul li:hover {
 /* When clicked on, add a background color and strike out text */
 .checked {
   background: #888;
-  color: #fff;
+/*   color: #fff; */
   text-decoration: line-through;
 }
+
 
 /* Style the close button */
 .remove {
@@ -94,8 +95,17 @@ ul li:hover {
   display: none;
 }
 
+.show1{
+  display: block;
+}
+
 .show{
   display: block;
+    text-decoration: none;
+    width: 80%;
+  border: none;
+  padding: 10px 10px 10px 10px;
+  background-color: white;
 }
 
 

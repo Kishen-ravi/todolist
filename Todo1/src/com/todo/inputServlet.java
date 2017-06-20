@@ -29,6 +29,7 @@ public class inputServlet extends HttpServlet {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	@SuppressWarnings("unchecked")
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		
@@ -40,6 +41,12 @@ public class inputServlet extends HttpServlet {
 			// TODO Auto-generated catch block
 			System.out.print(e);
 		}*/
+		String pass = "";		
+		String name1 = "";
+		String login = "";
+		String mail1 = "";
+		ArrayList<String> task = new ArrayList<String>();
+		
 		String output = request.getParameter("task");
 		String email = request.getParameter("task1");
 		String name = request.getParameter("task2");
@@ -82,8 +89,25 @@ public class inputServlet extends HttpServlet {
 
 		
 		datastore.put(list);
-		response.setContentType("text/plain");
-		response.getWriter().println("Data saved;");
+		
+		try{
+			Key taskKey1 = KeyFactory.createKey("task", email);
+			Entity employee = datastore.get(taskKey1);
+			task =   (ArrayList<String>) employee.getProperty("task");
+			name1 = (String) employee.getProperty("name");
+			mail1 = (String) employee.getProperty("email");
+			System.out.println(task);
+		}
+		catch(Exception e){
+			System.out.println(e);
+		}
+		RequestDispatcher dispatcher = request.getRequestDispatcher("todologin.jsp");
+		String success="<p style=\"color: red;\">Data Saved!!!</p>";
+		request.setAttribute("Success", success);
+		request.setAttribute("User", name);
+		request.setAttribute("Email", email);
+		request.setAttribute("Task", task);
+		dispatcher.forward( request, response );
 //		RequestDispatcher dispatcher = request.getRequestDispatcher("/todologin.jsp");
 ////		request.setAttribute("Name", output); // set your String value in the attribute
 ////		request.setAttribute("User", nam);
