@@ -117,6 +117,7 @@ function remove()
     var del = "true";
     var x = document.getElementById(qid).checked;
     console.log(id);
+    
     document.getElementById(sid).style.display = 'none';
     push(user,name,txt,id,x,del);
     return false;
@@ -126,11 +127,15 @@ function update() {
 	var id = this.getAttribute('id');
 	var tid = "t" + id;
 	var ui = "u" +id;
+	var sid = "s" + id;
 	var txt;
 	var txte;
 	var todos = [];
 	console.log(id);
-	document.getElementById("s"+id).style.textDecoration= 'none';
+	if(document.getElementById(sid).className == "checked")
+	{
+		document.getElementById(sid).className = "nonchecked";
+	}
 	var txt = document.getElementById(id).innerText;
 	console.log(txt);
 	document.getElementById(id).className = "text";
@@ -173,7 +178,10 @@ function update() {
 	    }
 	        push(user,name,txte,id,ck,rm);
 	        document.getElementById(id).textContent=txte;
-	    	document.getElementById("s"+id).style.textDecoration= 'line-through';
+	        if(document.getElementById(sid).className == "nonchecked")
+	    	{
+	        	document.getElementById(sid).className = "checked";
+	    	}
 	        document.getElementById("t"+id).className = "text";
 	        document.getElementById(id).className = "show1";
 	}
